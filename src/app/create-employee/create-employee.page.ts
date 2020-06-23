@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../services/data.service';
+import { DataService, Employee } from '../services/data.service';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-employee',
@@ -12,21 +14,38 @@ export class CreateEmployeePage implements OnInit {
   blankAvatar: string
 
   constructor(
-    formBuider: FormBuilder,
-    dataService: DataService
+    private _dataService: DataService,
+    private _router: Router,
+    private _toastController: ToastController,
+    formBuider: FormBuilder
   ) {
-    this.registrationFormGroup = formBuider.group({
-      avatarURL:[""],
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      job: [""],
-      description: [""],
-    })
+    this.blankAvatar = this._dataService.getBlankAvatar()
 
-    this.blankAvatar = dataService.getBlankAvatar()
+    this.registrationFormGroup = formBuider.group({
+      avatarUrl:[""],
+      name: [ , Validators.required],
+      email: [ , Validators.required],
+      job: [],
+      description: [],
+    })
+  }
+
+  register() {
+    const newEmployee: Employee = this.registrationFormGroup.value
+    this._dataService.createEmployee(newEmployee)
+
+    const toast = this._toastController.create({
+      message: `${newEmployee.name} Foi Registrado(a)`,
+      duration: 1500,
+      position: "top"
+    })
+    toast.then(toastMessage => toastMessage.present())
+    
+    setTimeout(() => {
+      this._router.navigate(["/home"])
+    }, 1500)
   }
 
   ngOnInit() {
   }
-
 }

@@ -10,7 +10,7 @@
   <ion-card>
     <ion-img
       class="profile-pic"
-      [src]="registrationFormGroup.value.avatarURL || blankAvatar"
+      [src]="registrationFormGroup.value.avatarUrl || blankAvatar"
       alt="Imagem inválida"
     >
     </ion-img>
@@ -18,36 +18,36 @@
 
       <form [formGroup]="registrationFormGroup">
         <ion-item>
-          <ion-label>URL do Avatar</ion-label>
-          <ion-input formControlName="avatarURL" type="url"></ion-input>
+          <ion-label position="floating">URL do Avatar</ion-label>
+          <ion-input formControlName="avatarUrl" type="url"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label>Nome</ion-label>
+          <ion-label position="floating">Nome</ion-label>
           <ion-input formControlName="name" type="name"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label>E-mail</ion-label>
+          <ion-label position="floating">E-mail</ion-label>
           <ion-input formControlName="email" type="email"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label>Cargo</ion-label>
+          <ion-label position="floating">Cargo</ion-label>
           <ion-input formControlName="job" type="name"></ion-input>
         </ion-item>
         
         <ion-item>
-          <ion-label>Descrição</ion-label>
+          <ion-label position="floating">Descrição</ion-label>
           <ion-textarea formControlName="description"></ion-textarea>
         </ion-item>
 
-
-        <!-- <ion-button
-          (click)="login()"
-          [disabled]="loginFormGroup.invalid"
-          class="ion-margin-top" expand="full">Cadastrar</ion-button> -->
+        <ion-button
+          (click)="register()"
+          [disabled]="registrationFormGroup.invalid"
+          class="ion-margin-top" expand="full">Cadastrar</ion-button>
       </form>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

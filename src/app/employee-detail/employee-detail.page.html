@@ -29,7 +29,7 @@
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{employee?.description}}
+        {{employee?.description || "Não informado"}}
       </ion-card-content>
     </ion-card>
   
@@ -45,7 +45,7 @@
         <ion-item>
           <ion-label>Cargo</ion-label>
           <ion-chip color="primary">
-            {{employee?.job}}
+            {{employee?.job || "Não informado"}}
           </ion-chip>
         </ion-item>
         
@@ -64,11 +64,11 @@
       </ion-fab-button>
   
       <ion-fab-list>
-        <ion-fab-button (click)="edit()">
+        <ion-fab-button [routerLink]="['/update-employee', employee.id]" button>
           <ion-icon color="success" name="build-outline"></ion-icon>
         </ion-fab-button>
   
-        <ion-fab-button (click)="delete()">
+        <ion-fab-button [routerLink]="['/delete-employee', employee.id]" button>
           <ion-icon color="danger" name="trash"></ion-icon>
         </ion-fab-button>
   

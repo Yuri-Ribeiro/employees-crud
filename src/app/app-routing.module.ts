@@ -27,6 +27,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'update-employee/:employeeID',
+    loadChildren: () => import('./update-employee/update-employee.module').then( m => m.UpdateEmployeePageModule)
   }
 ];
 

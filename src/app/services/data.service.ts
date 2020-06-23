@@ -4,9 +4,9 @@ export interface Employee {
   id: number;
   name: string;
   email: string;
-  avatarUrl: string;
-  description: string;
-  job: string;
+  avatarUrl?: string;
+  description?: string;
+  job?: string;
 }
 
 @Injectable({
@@ -82,17 +82,36 @@ export class DataService {
 
   constructor() { }
 
-  public getEmployees(): Employee[] {
-    return this.employees;
-  }
-
   public getBlankAvatar(): string {
     const blankAvatar = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
     return blankAvatar
   }
+
+  public readEmployees(): Employee[] {
+    return this.employees;
+  }
   
-  public getEmployeeById(id: number): Employee {
+  public readEmployeeById(id: number): Employee {
     return this.employees[id];
   }
 
+  public createEmployee(newEmployee: Employee): void {
+    const IDList = this.employees.map(employee => employee.id)
+    const biggestID = IDList.reduce((a, b) => {
+      return Math.max(a, b);
+    })
+    const newEmployeeID = biggestID + 1
+
+    if(!newEmployee.avatarUrl)
+      newEmployee.avatarUrl = this.getBlankAvatar()
+    
+    this.employees.push({...newEmployee, id: newEmployeeID})
+  }
+
+  public updateEmployee(updatedEmployee: Employee): void {
+    if(!updatedEmployee.avatarUrl)
+      updatedEmployee.avatarUrl = this.getBlankAvatar()
+    
+    this.employees[updatedEmployee.id] = updatedEmployee;
+  }
 }

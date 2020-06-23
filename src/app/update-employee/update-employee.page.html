@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="!employeeID; else employeeDetail">
+    <ion-skeleton-text class="skeleton-image ion-margin-top" animated></ion-skeleton-text>
+    <ion-card-header>
+      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+      
+      <ion-skeleton-text class="skeleton-button" animated></ion-skeleton-text>
+    </ion-card-header>
+  </ion-card>
+
+  <ng-template #employeeDetail>
+    <ion-card>
+      <ion-img class="profile-pic ion-margin-top" [src]="updateFormGroup.value.avatarUrl || blankAvatar"
+        alt="Imagem inválida">
+      </ion-img>
+      <ion-card-content>
+  
+        <form [formGroup]="updateFormGroup">
+          <ion-item>
+            <ion-label>ID</ion-label>
+            <ion-input formControlName="id" type="url"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">URL do Avatar</ion-label>
+            <ion-input formControlName="avatarUrl" type="url"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input formControlName="name" type="name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">Cargo</ion-label>
+            <ion-input formControlName="job" type="name"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">Descrição</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+  
+          <ion-button (click)="editEmployee()" [disabled]="updateFormGroup.invalid" class="ion-margin-top" expand="full">
+            Atualizar</ion-button>
+        </form>
+  
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

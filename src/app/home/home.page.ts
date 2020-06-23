@@ -9,10 +9,10 @@ import { DataService, Employee } from '../services/data.service';
 export class HomePage {
   employees: Employee[]
   
-  constructor(private data: DataService) {
+  constructor(private _dataService: DataService) {
     setTimeout(() => {
-      this.employees = this.data.getEmployees();
-    }, 3000)
+      this.employees = this._dataService.readEmployees();
+    }, 2500)
   }
 
   // refresh(ev) {
