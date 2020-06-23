@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="Cadastrar funcionário"></ion-back-button>
+      <ion-back-button text=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -33,14 +33,15 @@
         </ion-item>
 
         <ion-item>
-          <ion-label>Data de adimissão</ion-label>
-          <ion-input formControlName="admissionDate" type="bday"></ion-input>
-        </ion-item>
-
-        <ion-item>
           <ion-label>Cargo</ion-label>
           <ion-input formControlName="job" type="name"></ion-input>
         </ion-item>
+        
+        <ion-item>
+          <ion-label>Descrição</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+
 
         <!-- <ion-button
           (click)="login()"

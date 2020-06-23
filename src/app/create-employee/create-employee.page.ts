@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-create-employee',
@@ -8,18 +9,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CreateEmployeePage implements OnInit {
   registrationFormGroup: FormGroup
-  blankAvatar: string = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+  blankAvatar: string
 
   constructor(
     formBuider: FormBuilder,
+    dataService: DataService
   ) {
     this.registrationFormGroup = formBuider.group({
+      avatarURL:[""],
       name: ["", Validators.required],
       email: ["", Validators.required],
-      admissionDate: [""],
       job: [""],
-      avatarURL:[""],
+      description: [""],
     })
+
+    this.blankAvatar = dataService.getBlankAvatar()
   }
 
   ngOnInit() {
