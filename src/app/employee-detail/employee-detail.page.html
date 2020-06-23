@@ -7,20 +7,21 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngIf="!employee; else employeeDetail">
-      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
+  <ng-container *ngIf="!employee; else employeeDetail">
+    <ion-skeleton-text class="skeleton-image ion-margin-top" animated></ion-skeleton-text>
+    <ion-skeleton-text class="skeleton-header ion-margin-bottom" animated></ion-skeleton-text>
+    <ion-card>
       <ion-card-header>
-        <ion-skeleton-text class="skeleton-header ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-text" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-text" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-text" animated></ion-skeleton-text>
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-card-header>
     </ion-card>
+  </ng-container>
   
   <ng-template #employeeDetail>
-    <ion-img class="employeeImage ion-padding-top" [src]="employee?.avatarUrl"></ion-img>
+    <ion-img class="employeeImage ion-margin-top" [src]="employee?.avatarUrl" alt="Problema ao carregar imagem"></ion-img>
 
     <ion-card class="ion-no-margin">
       <ion-card-header>
@@ -35,6 +36,13 @@
   
     <ion-card>
       <ion-list lines="none">
+        <ion-item>
+          <ion-label>ID</ion-label>
+          <ion-chip color="primary">
+            {{employee?.id}}
+          </ion-chip>
+        </ion-item>
+        
         <ion-item>
           <ion-label>Nome</ion-label>
           <ion-chip color="primary">
@@ -65,7 +73,7 @@
   
       <ion-fab-list>
         <ion-fab-button [routerLink]="['/update-employee', employee.id]" button>
-          <ion-icon color="success" name="build-outline"></ion-icon>
+          <ion-icon color="primary" name="build-outline"></ion-icon>
         </ion-fab-button>
   
         <ion-fab-button [routerLink]="['/delete-employee', employee.id]" button>

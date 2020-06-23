@@ -32,18 +32,21 @@ export class CreateEmployeePage implements OnInit {
 
   register() {
     const newEmployee: Employee = this.registrationFormGroup.value
-    this._dataService.createEmployee(newEmployee)
+    const wasCreated: boolean = this._dataService.createEmployee(newEmployee)
 
     const toast = this._toastController.create({
-      message: `${newEmployee.name} Foi Registrado(a)`,
-      duration: 1500,
-      position: "top"
+      message: wasCreated?`${newEmployee.name} Foi registrado(a)`: `Usuário já está cadastrado`,
+      duration: 2000,
+      position: "top",
+      // possível adicionar cores ao toast: https://ionicframework.com/docs/api/toast
+      //color: "success"
     })
     toast.then(toastMessage => toastMessage.present())
     
-    setTimeout(() => {
-      this._router.navigate(["/home"])
-    }, 1500)
+    if(wasCreated)
+      setTimeout(() => {
+        this._router.navigate(["/home"])
+      }, 1500)
   }
 
   ngOnInit() {

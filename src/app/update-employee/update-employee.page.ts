@@ -24,9 +24,10 @@ export class UpdateEmployeePage implements OnInit {
     this.blankAvatar = this._dataService.getBlankAvatar()
 
     setTimeout(() => {
-      this.employeeID = this._activatedRoute.snapshot.params["employeeID"]
+      // Pode haver erro se tentar acessar um usuário recém-criado após atualizar a página; no delete também
+      this.employeeID = Number(this._activatedRoute.snapshot.params["employeeID"])
       const employee: Employee = _dataService.readEmployeeById(this.employeeID)
-  
+
       this.updateFormGroup = formBuilder.group({
         id:[{value: employee.id, disabled: true}, Validators.required],
         avatarUrl:[employee.avatarUrl],
@@ -35,7 +36,7 @@ export class UpdateEmployeePage implements OnInit {
         job: [employee.job],
         description: [employee.description],
       })
-    }, 2500)
+    }, 3000)
   }
 
   editEmployee() {

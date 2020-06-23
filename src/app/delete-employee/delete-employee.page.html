@@ -33,12 +33,12 @@
 
   <ng-template #employeeDetail>
     <ion-card>
-      <ion-img class="profile-pic ion-margin-top" [src]="updateFormGroup.value.avatarUrl || blankAvatar"
-        alt="Imagem inválida">
+      <ion-img class="profile-pic ion-margin-top" [src]="deleteFormGroup.value.avatarUrl"
+      alt="Problema ao carregar imagem">
       </ion-img>
       <ion-card-content>
   
-        <form [formGroup]="updateFormGroup">
+        <form [formGroup]="deleteFormGroup">
           <ion-item>
             <ion-label>ID</ion-label>
             <ion-input formControlName="id" type="url"></ion-input>
@@ -69,8 +69,8 @@
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
   
-          <ion-button (click)="editEmployee()" [disabled]="updateFormGroup.invalid" class="ion-margin-top" expand="full">
-            Atualizar</ion-button>
+          <ion-button (click)="removeEmployee()" class="ion-margin-top" expand="full" color="danger">
+            Apagar</ion-button>
         </form>
   
       </ion-card-content>

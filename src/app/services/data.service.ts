@@ -91,27 +91,45 @@ export class DataService {
     return this.employees;
   }
   
-  public readEmployeeById(id: number): Employee {
-    return this.employees[id];
+  public readEmployeeById(employeeID: number): Employee {
+    const IDList = employee => employee.id
+    const employeeIndex = this.employees.map(IDList).indexOf(employeeID)
+
+    return this.employees[employeeIndex];
   }
 
-  public createEmployee(newEmployee: Employee): void {
+  public createEmployee(newEmployee: Employee): boolean {
+    // checar se email já foi cadastrado
+    const emailList = this.employees.map(employee => employee.email)
+    const emailIndex = emailList.indexOf(newEmployee.email)
+    if(emailIndex != -1) return false
+
+    // gerar novo id
     const IDList = this.employees.map(employee => employee.id)
-    const biggestID = IDList.reduce((a, b) => {
-      return Math.max(a, b);
-    })
+    const maxID = (max, cur) => Math.max( max, cur )
+    const biggestID = IDList.reduce(maxID, -1)
     const newEmployeeID = biggestID + 1
 
     if(!newEmployee.avatarUrl)
       newEmployee.avatarUrl = this.getBlankAvatar()
     
     this.employees.push({...newEmployee, id: newEmployeeID})
+    return true
   }
 
   public updateEmployee(updatedEmployee: Employee): void {
     if(!updatedEmployee.avatarUrl)
       updatedEmployee.avatarUrl = this.getBlankAvatar()
     
-    this.employees[updatedEmployee.id] = updatedEmployee;
+    this.employees[updatedEmployee.id] = updatedEmployee
+  }
+
+  public deleteEmployee(employeeID: number): void {
+    const IDList = employee => employee.id
+    const employeeIndex = this.employees.map(IDList).indexOf(employeeID)
+
+    if (employeeIndex > -1) {
+      this.employees.splice(employeeIndex, 1)
+    }
   }
 }

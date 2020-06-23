@@ -15,9 +15,9 @@ export class EmployeeDetailPage implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {
     setTimeout(() => {
-      const employeeID = _activatedRoute.snapshot.params['employeeID']
+      const employeeID: number = Number(_activatedRoute.snapshot.params['employeeID'])
       this.employee = this._data.readEmployeeById(employeeID)
-    }, 2500)
+    }, 3000)
   }
 
   ngOnInit() {

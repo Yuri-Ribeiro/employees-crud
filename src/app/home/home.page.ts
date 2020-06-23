@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService, Employee } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,21 @@ import { DataService, Employee } from '../services/data.service';
 export class HomePage {
   employees: Employee[]
   
-  constructor(private _dataService: DataService) {
+  constructor(
+    private _dataService: DataService,
+    private _router: Router
+  ) {
     setTimeout(() => {
       this.employees = this._dataService.readEmployees();
-    }, 2500)
+    }, 3000)
+  }
+
+  navigateToUpdateEmployee(employeeID: number) {
+    this._router.navigate([`/update-employee/${employeeID}`])
+  }
+  
+  navigateToDeleteEmployee(employeeID: number) {
+    this._router.navigate([`/delete-employee/${employeeID}`])
   }
 
   // refresh(ev) {

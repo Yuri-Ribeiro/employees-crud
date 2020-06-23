@@ -13,24 +13,24 @@
 
   <ion-list *ngIf="!employees; else employeeList">
     <ion-card>
-      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
-      <ion-card-header>
+      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+      <ion-card-header class="skeleton-header">
         <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-card-header>
     </ion-card>
 
     <ion-card>
-      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
-      <ion-card-header>
+      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+      <ion-card-header class="skeleton-header">
         <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-card-header>
     </ion-card>
 
     <ion-card>
-      <ion-skeleton-text class="skeleton-image" animated></ion-skeleton-text>
-      <ion-card-header>
+      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+      <ion-card-header class="skeleton-header">
         <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-card-header>
@@ -41,15 +41,15 @@
     <ion-list>
       <ion-item-sliding *ngFor="let employee of employees">
 
-        <ion-item-options side="start">
+        <ion-item-options side="start" (ionSwipe)="navigateToUpdateEmployee(employee.id)">
           <ion-item-option [routerLink]="['/update-employee', employee.id]" button>
             <ion-icon name="build-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
 
         <ion-item>
-          <ion-card [routerLink]="['employee-detail', employee.id]" button>
-            <ion-img class="image-card" [src]="employee.avatarUrl"></ion-img>
+          <ion-card class="employee-item" [routerLink]="['employee-detail', employee.id]" button>
+            <ion-img class="image-card ion-margin-top" [src]="employee.avatarUrl" alt="Problema ao carregar imagem"></ion-img>
             <ion-card-header>
               <ion-card-title>{{employee.name}}</ion-card-title>
               <ion-card-subtitle>{{employee.email}}</ion-card-subtitle>
@@ -57,7 +57,7 @@
           </ion-card>
         </ion-item>
 
-        <ion-item-options side="end">
+        <ion-item-options side="end" (ionSwipe)="navigateToDeleteEmployee(employee.id)">
           <ion-item-option [routerLink]="['/delete-employee', employee.id]" button color="danger">
             <ion-icon name="trash"></ion-icon>
           </ion-item-option>
