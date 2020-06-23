@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Cadastrar funcionário"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img
+      class="profile-pic"
+      [src]="registrationFormGroup.value.avatarURL || blankAvatar"
+      alt="Imagem inválida"
+    >
+    </ion-img>
+    <ion-card-content>
+
+      <form [formGroup]="registrationFormGroup">
+        <ion-item>
+          <ion-label>URL do Avatar</ion-label>
+          <ion-input formControlName="avatarURL" type="url"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Nome</ion-label>
+          <ion-input formControlName="name" type="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>E-mail</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Data de adimissão</ion-label>
+          <ion-input formControlName="admissionDate" type="bday"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cargo</ion-label>
+          <ion-input formControlName="job" type="name"></ion-input>
+        </ion-item>
+
+        <!-- <ion-button
+          (click)="login()"
+          [disabled]="loginFormGroup.invalid"
+          class="ion-margin-top" expand="full">Cadastrar</ion-button> -->
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

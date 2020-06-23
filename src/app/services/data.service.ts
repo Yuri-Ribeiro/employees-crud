@@ -1,83 +1,92 @@
 import { Injectable } from '@angular/core';
 
-export interface Message {
-  fromName: string;
-  subject: string;
-  date: string;
+export interface Employee {
   id: number;
-  read: boolean;
+  name: string;
+  email: string;
+  avatarUrl: string;
+  description: string;
+  job: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public messages: Message[] = [
+  public employees: Employee[] = [
     {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
       id: 0,
-      read: false
+      name: 'Aline Regina',
+      email: 'alineregina@taubate.com.br',
+      avatarUrl: "https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027367_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Programadora"
     },
     {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
       id: 1,
-      read: false
+      name: 'Henrique Lucca',
+      email: 'henriquelucca@abcmail.com',
+      avatarUrl: "https://cdn.pixabay.com/photo/2016/04/01/11/25/avatar-1300331_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Engenheiro"
     },
     {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
       id: 2,
-      read: false
+      name: 'Larissa Aline',
+      email: 'larissaaline@alunos.com',
+      avatarUrl: "https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Secretária"
     },
     {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
       id: 3,
-      read: false
+      name: 'Jorge Melo',
+      email: 'jorgemelo@amaral.com.br',
+      avatarUrl: "https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Promotor de vendas"
     },
     {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
       id: 4,
-      read: false
+      name: 'Victor Benedito',
+      email: 'victorbenedito@zymail.com',
+      avatarUrl: "https://cdn.pixabay.com/photo/2016/11/01/21/11/avatar-1789663_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Contador"
     },
     {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
       id: 5,
-      read: false
+      name: 'Mateus Geraldo',
+      email: 'mateusgeraldo@cdmail.com',
+      avatarUrl: "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Programador"
     },
     {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
       id: 6,
-      read: false
+      name: 'Alícia Alana',
+      email: 'aliciaalana@cdmail.com.br',
+      avatarUrl: "https://cdn.pixabay.com/photo/2017/01/31/19/07/avatar-2026510_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Executiva"
     },
     {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
       id: 7,
-      read: false
+      name: 'Emily Cláudia',
+      email: 'emilyclaudia@alunos.br',
+      avatarUrl: "https://cdn.pixabay.com/photo/2014/03/24/17/19/teacher-295387_960_720.png",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      job: "Enfermeira"
     }
   ];
 
   constructor() { }
 
-  public getMessages(): Message[] {
-    return this.messages;
+  public getEmployees(): Employee[] {
+    return this.employees;
   }
 
-  public getMessageById(id: number): Message {
-    return this.messages[id];
+  public getEmployeeById(id: number): Employee {
+    return this.employees[id];
   }
 }
