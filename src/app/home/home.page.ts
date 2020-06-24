@@ -26,10 +26,4 @@ export class HomePage {
   navigateToDeleteEmployee(employeeID: number) {
     this._router.navigate([`/delete-employee/${employeeID}`])
   }
-
-  // refresh(ev) {
-  //   setTimeout(() => {
-  //     ev.detail.complete();
-  //   }, 3000);
-  // }
 }

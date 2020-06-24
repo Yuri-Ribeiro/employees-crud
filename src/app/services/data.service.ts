@@ -118,10 +118,13 @@ export class DataService {
   }
 
   public updateEmployee(updatedEmployee: Employee): void {
+    const IDList = employee => employee.id
+    const employeeIndex = this.employees.map(IDList).indexOf(updatedEmployee.id)
+
     if(!updatedEmployee.avatarUrl)
       updatedEmployee.avatarUrl = this.getBlankAvatar()
     
-    this.employees[updatedEmployee.id] = updatedEmployee
+    this.employees[employeeIndex] = updatedEmployee
   }
 
   public deleteEmployee(employeeID: number): void {
