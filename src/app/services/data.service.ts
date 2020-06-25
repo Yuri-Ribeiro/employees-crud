@@ -100,8 +100,8 @@ export class DataService {
 
   public createEmployee(newEmployee: Employee): boolean {
     // checar se email já foi cadastrado
-    const emailList = this.employees.map(employee => employee.email)
-    const emailIndex = emailList.indexOf(newEmployee.email)
+    const emailList = this.employees.map(employee => employee.email.toLowerCase())
+    const emailIndex = emailList.indexOf(newEmployee.email.toLowerCase())
     if(emailIndex != -1) return false
 
     // gerar novo id

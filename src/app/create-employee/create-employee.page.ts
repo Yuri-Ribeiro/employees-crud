@@ -35,11 +35,10 @@ export class CreateEmployeePage implements OnInit {
     const wasCreated: boolean = this._dataService.createEmployee(newEmployee)
 
     const toast = this._toastController.create({
-      message: wasCreated?`${newEmployee.name} Foi registrado(a)`: `Usuário já está cadastrado`,
+      message: wasCreated?`${newEmployee.name} foi cadastrado com sucesso`:`Usuário já está cadastrado`,
       duration: 2000,
       position: "top",
-      // possível adicionar cores ao toast: https://ionicframework.com/docs/api/toast
-      //color: "success"
+      color: wasCreated?undefined:"danger"
     })
     toast.then(toastMessage => toastMessage.present())
     
