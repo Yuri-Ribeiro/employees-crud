@@ -9,8 +9,9 @@
 <ion-content>
   <ion-card>
     <ion-img
+      (click)="selectImageSource()"
       class="profile-pic"
-      [src]="registrationFormGroup.value.avatarUrl || blankAvatar"
+      [src]="avatarUrl || blankAvatar"
       alt="Imagem inválida"
     >
     </ion-img>
