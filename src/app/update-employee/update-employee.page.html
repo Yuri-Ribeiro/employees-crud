@@ -33,7 +33,10 @@
 
   <ng-template #employeeDetail>
     <ion-card>
-      <ion-img class="profile-pic ion-margin-top" [src]="updateFormGroup.value.avatarUrl || blankAvatar"
+      <ion-img
+        (click)="selectImageSource()"
+        class="profile-pic ion-margin-top"
+        [src]="avatar || blankAvatar"
         alt="Imagem inválida">
       </ion-img>
       <ion-card-content>

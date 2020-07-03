@@ -37,7 +37,7 @@ export class CreateEmployeePage implements OnInit {
   ngOnInit() {
     this.registrationFormGroup.controls['avatarUrl'].valueChanges.subscribe(newAvatarUrl => {
       this.avatar = newAvatarUrl
-  })
+    })
   }
 
   register() {
