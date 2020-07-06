@@ -72,6 +72,10 @@
       </ion-fab-button>
   
       <ion-fab-list>
+        <ion-fab-button (click)="share()" button>
+          <ion-icon name="share-social"></ion-icon>
+        </ion-fab-button>
+
         <ion-fab-button [routerLink]="['/update-employee', employee.id]" button>
           <ion-icon color="primary" name="build-outline"></ion-icon>
         </ion-fab-button>

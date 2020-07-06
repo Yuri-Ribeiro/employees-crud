@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Camera } from "@ionic-native/camera/ngx";
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { Camera } from "@ionic-native/camera/ngx";
     IonicModule.forRoot(),
     AppRoutingModule],
   providers: [
+    SocialSharing,
     Camera,
     StatusBar,
     SplashScreen,
