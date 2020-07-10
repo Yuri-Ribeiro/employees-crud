@@ -12,10 +12,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { Camera } from "@ionic-native/camera/ngx";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { environment } from "src/environments/environment";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule],
