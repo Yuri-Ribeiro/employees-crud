@@ -39,7 +39,7 @@
       <ion-item-sliding *ngFor="let employee of employees">
 
         <ion-item-options side="start" (ionSwipe)="navigateToUpdateEmployee(employee.id)">
-          <ion-item-option [routerLink]="['/update-employee', employee.id]" button>
+          <ion-item-option [routerLink]="['update-employee', employee.id]" button>
             <ion-icon name="build-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -55,7 +55,7 @@
         </ion-item>
 
         <ion-item-options side="end" (ionSwipe)="navigateToDeleteEmployee(employee.id)">
-          <ion-item-option [routerLink]="['/delete-employee', employee.id]" button color="danger">
+          <ion-item-option [routerLink]="['delete-employee', employee.id]" button color="danger">
             <ion-icon name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>

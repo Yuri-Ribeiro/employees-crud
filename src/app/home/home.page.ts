@@ -20,10 +20,10 @@ export class HomePage {
   }
 
   navigateToUpdateEmployee(employeeID: number) {
-    this._router.navigate([`/update-employee/${employeeID}`])
+    this._router.navigate([`/home/update-employee/${employeeID}`])
   }
   
   navigateToDeleteEmployee(employeeID: number) {
-    this._router.navigate([`/delete-employee/${employeeID}`])
+    this._router.navigate([`/home/delete-employee/${employeeID}`])
   }
 }
