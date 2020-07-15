@@ -16,21 +16,21 @@ const routes: Routes = [
       {
         path: 'create-employee',
         loadChildren: () => import('./create-employee/create-employee.module').then( m => m.CreateEmployeePageModule)
-      }
-    ]
+      },
+      {
+        path: 'update-employee/:employeeID',
+        loadChildren: () => import('./update-employee/update-employee.module').then( m => m.UpdateEmployeePageModule)
+      },
+      {
+        path: 'delete-employee/:employeeID',
+        loadChildren: () => import('./delete-employee/delete-employee.module').then( m => m.DeleteEmployeePageModule)
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
-  },
-  {
-    path: 'update-employee/:employeeID',
-    loadChildren: () => import('./update-employee/update-employee.module').then( m => m.UpdateEmployeePageModule)
-  },
-  {
-    path: 'delete-employee/:employeeID',
-    loadChildren: () => import('./delete-employee/delete-employee.module').then( m => m.DeleteEmployeePageModule)
   },
   {
     path: 'login',
