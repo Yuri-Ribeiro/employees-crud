@@ -16,9 +16,9 @@ export class LoginPage implements OnInit {
     private _loginService: LoginService,
     private _router: Router,
     private _toastController: ToastController,
-    formBuider: FormBuilder
+    formBuilder: FormBuilder
   ){
-    this.loginFormGroup = formBuider.group({
+    this.loginFormGroup = formBuilder.group({
       email: ["", [Validators.required]],
       password: ["", [Validators.required]],
     })
@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       .catch( authError => {
         const toast = this._toastController.create({
           message: `${authError}`,
-          duration: 5000,
+          duration: 3500,
           position: "top",
           color: "danger"
         })

@@ -11,19 +11,30 @@ export class HomePage {
   employees: Employee[]
   
   constructor(
-    private _dataService: DataService,
-    private _router: Router
+    private _router: Router,
+    dataService: DataService
   ) {
     setTimeout(() => {
-      this.employees = this._dataService.readEmployees();
-    }, 3000)
+      this.employees = dataService.readEmployees()
+    }, 1500)
   }
 
-  navigateToUpdateEmployee(employeeID: number) {
+  get sortedEmployees(){
+    return this.sortEmployeeByname(this.employees)
+  }
+
+  // ordena funcionários por ordem alfabética
+  sortEmployeeByname(employees: Employee[]): Employee[] {
+    return employees.sort( (employeeA, employeeB) => {
+      return employeeA.name.toLowerCase().localeCompare(employeeB.name.toLowerCase())
+    })
+  }
+
+  navigateToUpdateEmployee(employeeID: string) {
     this._router.navigate([`/home/update-employee/${employeeID}`])
   }
   
-  navigateToDeleteEmployee(employeeID: number) {
+  navigateToDeleteEmployee(employeeID: string) {
     this._router.navigate([`/home/delete-employee/${employeeID}`])
   }
 }
