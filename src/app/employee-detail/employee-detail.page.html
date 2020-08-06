@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="!employee; else employeeDetail">
+  <ng-template #skeleton>
     <ion-skeleton-text class="skeleton-image ion-margin-top" animated></ion-skeleton-text>
     <ion-skeleton-text class="skeleton-header ion-margin-bottom" animated></ion-skeleton-text>
     <ion-card>
@@ -18,19 +18,19 @@
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-card-header>
     </ion-card>
-  </ng-container>
+  </ng-template>
   
-  <ng-template #employeeDetail>
-    <ion-img class="employeeImage ion-margin-top" [src]="employee?.avatarUrl" alt="Problema ao carregar imagem"></ion-img>
+  <ng-container *ngIf="employee; else skeleton">
+    <ion-img class="employeeImage ion-margin-top" [src]="employee.avatarUrl" alt="Problema ao carregar imagem"></ion-img>
 
     <ion-card class="ion-no-margin">
       <ion-card-header>
         <ion-card-title>
-          {{employee?.name}}
+          {{employee.name}}
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{employee?.description || "Não informado"}}
+        {{employee.description || "Não informado"}}
       </ion-card-content>
     </ion-card>
   
@@ -39,28 +39,28 @@
         <ion-item>
           <ion-label>ID</ion-label>
           <ion-chip color="primary">
-            {{employee?.id}}
+            {{employee.id}}
           </ion-chip>
         </ion-item>
         
         <ion-item>
           <ion-label>Nome</ion-label>
           <ion-chip color="primary">
-            {{employee?.name}}
+            {{employee.name}}
           </ion-chip>
         </ion-item>
         
         <ion-item>
           <ion-label>Cargo</ion-label>
           <ion-chip color="primary">
-            {{employee?.job || "Não informado"}}
+            {{employee.job || "Não informado"}}
           </ion-chip>
         </ion-item>
         
         <ion-item>
           <ion-label>E-mail</ion-label>
           <ion-chip color="primary">
-            {{employee?.email}}
+            {{employee.email}}
           </ion-chip>
         </ion-item>
       </ion-list>
@@ -83,5 +83,5 @@
       </ion-fab-list>
     </ion-fab>
 
-  </ng-template>
+  </ng-container>
 </ion-content>
