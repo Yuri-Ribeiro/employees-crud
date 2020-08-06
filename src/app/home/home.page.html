@@ -39,7 +39,7 @@
   </ng-template>
 
   <ng-container *ngIf="employees; else skeleton">
-    <ion-list id>
+    <ion-list>
       <ion-item-sliding *ngFor="let employee of sortedEmployees">
 
         <ion-item-options side="start" (ionSwipe)="navigateToUpdateEmployee(employee.id)">
