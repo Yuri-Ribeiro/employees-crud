@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface Employee {
-  id: number;
+  id: string;
   name: string;
   email: string;
   avatarUrl?: string;
@@ -15,7 +15,7 @@ export interface Employee {
 export class DataService {
   public employees: Employee[] = [
     {
-      id: 0,
+      id: "0",
       name: 'Aline Regina',
       email: 'alineregina@taubate.com.br',
       avatarUrl: "https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027367_960_720.png",
@@ -23,7 +23,7 @@ export class DataService {
       job: "Programadora"
     },
     {
-      id: 1,
+      id: "1",
       name: 'Henrique Lucca',
       email: 'henriquelucca@abcmail.com',
       avatarUrl: "https://cdn.pixabay.com/photo/2016/04/01/11/25/avatar-1300331_960_720.png",
@@ -31,7 +31,7 @@ export class DataService {
       job: "Engenheiro"
     },
     {
-      id: 2,
+      id: "2",
       name: 'Larissa Aline',
       email: 'larissaaline@alunos.com',
       avatarUrl: "https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png",
@@ -39,7 +39,7 @@ export class DataService {
       job: "Secretária"
     },
     {
-      id: 3,
+      id: "3",
       name: 'Jorge Melo',
       email: 'jorgemelo@amaral.com.br',
       avatarUrl: "https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_960_720.png",
@@ -47,7 +47,7 @@ export class DataService {
       job: "Promotor de vendas"
     },
     {
-      id: 4,
+      id: "4",
       name: 'Victor Benedito',
       email: 'victorbenedito@zymail.com',
       avatarUrl: "https://cdn.pixabay.com/photo/2016/11/01/21/11/avatar-1789663_960_720.png",
@@ -55,7 +55,7 @@ export class DataService {
       job: "Contador"
     },
     {
-      id: 5,
+      id: "5",
       name: 'Mateus Geraldo',
       email: 'mateusgeraldo@cdmail.com',
       avatarUrl: "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png",
@@ -63,7 +63,7 @@ export class DataService {
       job: "Programador"
     },
     {
-      id: 6,
+      id: "6",
       name: 'Alícia Alana',
       email: 'aliciaalana@cdmail.com.br',
       avatarUrl: "https://cdn.pixabay.com/photo/2017/01/31/19/07/avatar-2026510_960_720.png",
@@ -71,7 +71,7 @@ export class DataService {
       job: "Executiva"
     },
     {
-      id: 7,
+      id: "7",
       name: 'Emily Cláudia',
       email: 'emilyclaudia@alunos.br',
       avatarUrl: "https://cdn.pixabay.com/photo/2014/03/24/17/19/teacher-295387_960_720.png",
@@ -91,7 +91,7 @@ export class DataService {
     return this.employees;
   }
   
-  public readEmployeeById(employeeID: number): Employee {
+  public readEmployeeById(employeeID: string): Employee {
     const IDList = employee => employee.id
     const employeeIndex = this.employees.map(IDList).indexOf(employeeID)
 
@@ -105,10 +105,10 @@ export class DataService {
     if(emailIndex != -1) return false
 
     // gerar novo id
-    const IDList = this.employees.map(employee => employee.id)
+    const IDList = this.employees.map(employee => Number(employee.id))
     const maxID = (max, cur) => Math.max( max, cur )
     const biggestID = IDList.reduce(maxID, -1)
-    const newEmployeeID = biggestID + 1
+    const newEmployeeID: string = String(biggestID + 1)
 
     if(!newEmployee.avatarUrl)
       newEmployee.avatarUrl = this.getBlankAvatar()
@@ -117,7 +117,14 @@ export class DataService {
     return true
   }
 
-  public updateEmployee(updatedEmployee: Employee): void {
+  public updateEmployee(updatedEmployee: Employee): boolean {
+    // checa se email novo não existe ou, se existir, permanece o mesmo do usuário
+    const emailList = this.employees.map(employee => employee.email.toLowerCase())
+    const emailIndex = emailList.indexOf(updatedEmployee.email.toLowerCase())
+    if(emailIndex != -1 && this.employees[emailIndex].id != updatedEmployee.id){
+      return false
+    }
+
     const IDList = employee => employee.id
     const employeeIndex = this.employees.map(IDList).indexOf(updatedEmployee.id)
 
@@ -125,9 +132,10 @@ export class DataService {
       updatedEmployee.avatarUrl = this.getBlankAvatar()
     
     this.employees[employeeIndex] = updatedEmployee
+    return true
   }
 
-  public deleteEmployee(employeeID: number): void {
+  public deleteEmployee(employeeID: string): void {
     const IDList = employee => employee.id
     const employeeIndex = this.employees.map(IDList).indexOf(employeeID)
 

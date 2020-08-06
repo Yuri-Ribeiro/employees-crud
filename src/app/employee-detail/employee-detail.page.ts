@@ -12,14 +12,14 @@ export class EmployeeDetailPage implements OnInit {
   employee: Employee
 
   constructor(
-    private _data: DataService,
-    private _activatedRoute: ActivatedRoute,
-    private _socialSharing: SocialSharing
+    private _socialSharing: SocialSharing,
+    activatedRoute: ActivatedRoute,
+    dataService: DataService
   ) {
     setTimeout(() => {
-      const employeeID: number = Number(_activatedRoute.snapshot.params['employeeID'])
-      this.employee = this._data.readEmployeeById(employeeID)
-    }, 3000)
+      const employeeID: string = activatedRoute.snapshot.params['employeeID']
+      this.employee = dataService.readEmployeeById(employeeID)
+    }, 1500)
   }
 
   ngOnInit() {
