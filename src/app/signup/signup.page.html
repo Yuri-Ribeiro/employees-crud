@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-buttons class="back-button">
+    <ion-back-button text=""></ion-back-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+<ion-icon class="icon" name="person-add-outline"></ion-icon>
+<ion-label class="label">Bem vindo ao Employees</ion-label>
+
+<ion-card>
+  <ion-card-content>
+    <form [formGroup]="signupFormGroup">
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Senha</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+
+      <ion-button
+        class="ion-margin-top"
+        color="tertiary"
+        expand="full"
+        [disabled]="signupFormGroup.invalid"
+        (click)="signup()"
+        >Cadastrar</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+</ion-content>
