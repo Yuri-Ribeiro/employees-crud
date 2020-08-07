@@ -7,36 +7,40 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ion-list *ngIf="!employees; else employeeList">
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
-
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
-
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
-  </ion-list>
-
-  <ng-template  #employeeList>
+  <!-- A tag ng-template simplesmente define um modelo que não é renderizado. Esse é um comportamento esperado, pois queremos somente defini-lo, não
+  defini-la de forma permanente. Ativaremos ela de acordo com uma diretiva ngIf mais a frente. Usamos a sintaxe #skeleton para darmos um nome/referência
+  ao modelo -->
+  <ng-template #skeleton>
     <ion-list>
-      <ion-item-sliding *ngFor="let employee of employees">
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+  </ng-template>
+
+  <ng-container  *ngIf="employees; else skeleton">
+    <ion-list>
+      <ion-item-sliding *ngFor="let employee of sortedEmployees">
 
         <ion-item-options side="start" (ionSwipe)="navigateToUpdateEmployee(employee.id)">
           <ion-item-option [routerLink]="['update-employee', employee.id]" button>
@@ -68,6 +72,6 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-  </ng-template>
+  </ng-container>
 
 </ion-content>

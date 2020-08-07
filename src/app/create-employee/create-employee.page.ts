@@ -17,11 +17,11 @@ export class CreateEmployeePage implements OnInit {
     private _dataService: DataService,
     private _router: Router,
     private _toastController: ToastController,
-    formBuider: FormBuilder
+    formBuilder: FormBuilder
   ) {
     this.blankAvatar = this._dataService.getBlankAvatar()
 
-    this.registrationFormGroup = formBuider.group({
+    this.registrationFormGroup = formBuilder.group({
       avatarUrl:[""],
       name: [ , Validators.required],
       email: [ , Validators.required],
@@ -36,16 +36,14 @@ export class CreateEmployeePage implements OnInit {
 
     const toast = this._toastController.create({
       message: wasCreated?`${newEmployee.name} foi cadastrado com sucesso`:`Usuário já está cadastrado`,
-      duration: 2000,
+      duration: 3500,
       position: "top",
       color: wasCreated?undefined:"danger"
     })
     toast.then(toastMessage => toastMessage.present())
     
     if(wasCreated)
-      setTimeout(() => {
-        this._router.navigate(["/home"])
-      }, 1500)
+      this._router.navigate(["/home"])
   }
 
   ngOnInit() {

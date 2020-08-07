@@ -7,33 +7,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="!employeeID && employeeID != 0; else employeeDetail">
-    <ion-skeleton-text class="skeleton-image ion-margin-top" animated></ion-skeleton-text>
-    <ion-card-header>
-      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
-
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
-
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
-
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
-
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
-
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-      
-      <ion-skeleton-text class="skeleton-button" animated></ion-skeleton-text>
-    </ion-card-header>
-  </ion-card>
-
-  <ng-template #employeeDetail>
+  <ng-template #skeleton>
     <ion-card>
-      <ion-img class="profile-pic ion-margin-top" [src]="updateFormGroup.value.avatarUrl || blankAvatar"
+      <ion-skeleton-text class="skeleton-image ion-margin-top" animated></ion-skeleton-text>
+      <ion-card-header>
+        <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+  
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+  
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+  
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+  
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="skeleton-margin-bottom" animated></ion-skeleton-text>
+  
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+        
+        <ion-skeleton-text class="skeleton-button" animated></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
+
+  <ng-container *ngIf="updateFormGroup.getRawValue().id; else skeleton">
+    <ion-card>
+      <ion-img class="profile-pic ion-margin-top" [src]="avatar"
         alt="Imagem inválida">
       </ion-img>
       <ion-card-content>
@@ -75,5 +77,5 @@
   
       </ion-card-content>
     </ion-card>
-  </ng-template>
+  </ng-container>
 </ion-content>

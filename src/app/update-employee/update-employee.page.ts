@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService, Employee } from '../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-update-employee',
@@ -11,52 +12,77 @@ import { ToastController } from '@ionic/angular';
 })
 export class UpdateEmployeePage implements OnInit {
   updateFormGroup: FormGroup
-  blankAvatar: string
-  employeeID: number
+  employeeID: string
+  avatar: string
+  originalAvatarUrl: string
+  updateTemplateAvatarSubscription: Subscription
 
   constructor(
     private _dataService: DataService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute,
     private _toastController: ToastController,
+    activatedRoute: ActivatedRoute,
     formBuilder: FormBuilder
   ) {
-    this.blankAvatar = this._dataService.getBlankAvatar()
+    // como os dados ainda não são persistidos, haverá erro se atualizar a aplicação e tentar acessar um usuário recém-criado
+    this.employeeID = activatedRoute.snapshot.params["employeeID"]
+
+    this.updateFormGroup = formBuilder.group({
+      // por conveniência, não iremos inicializar o id abaixo com o valor id já recebido, pois ele é ideal para que, no template, testemos se
+      // o formulário já preenchido
+      id:[{value: null, disabled: true}, Validators.required],
+      avatarUrl:[],
+      name: [, Validators.required],
+      email: [, Validators.required],
+      job: [],
+      description: []
+    })
+  }
+
+  ngOnInit() {
+    // quando a Url no campo do formulário mudar, o avatar do template será atualizado em tempo real. Se for uma string vazia, voltará a ser a original.
+    this.updateTemplateAvatarSubscription = this.updateFormGroup.controls['avatarUrl'].valueChanges.subscribe(newAvatarUrl => {
+      this.avatar = newAvatarUrl == "" ? this.originalAvatarUrl: newAvatarUrl
+    })
 
     setTimeout(() => {
-      // Pode haver erro se tentar acessar um usuário recém-criado após atualizar a página; no delete também
-      this.employeeID = Number(this._activatedRoute.snapshot.params["employeeID"])
-      const employee: Employee = _dataService.readEmployeeById(this.employeeID)
+      const employee: Employee = this._dataService.readEmployeeById(this.employeeID)
 
-      this.updateFormGroup = formBuilder.group({
-        id:[{value: employee.id, disabled: true}, Validators.required],
-        avatarUrl:[employee.avatarUrl],
-        name: [employee.name, Validators.required],
-        email: [employee.email, Validators.required],
-        job: [employee.job],
-        description: [employee.description],
+      this.originalAvatarUrl = employee.avatarUrl
+
+      this.updateFormGroup.setValue({
+        id: employee.id,
+        avatarUrl: employee.avatarUrl,
+        name: employee.name,
+        email: employee.email,
+        job: employee.job,
+        description: employee.description,
       })
-    }, 3000)
+    }, 1500)
+  }
+
+  // a abordagem de desinscrever-se é desejada, pois, quando uma página é retirada da pilha de navegação, ela deve ser destruída, mas isso pode não acontecer
+  // instantaneamente. Portanto, forçar seus Observables a cancelar a inscrição quando uma página deixa de ser exibida é uma maneira de evitar várias
+  // inscrições desnecessárias.
+  ionViewWillLeave() {
+    this.updateTemplateAvatarSubscription.unsubscribe()
   }
 
   editEmployee() {
     // O id não fica na propriedade value quando está desativada
     const updatedEmployee = {...this.updateFormGroup.value}
-    this._dataService.updateEmployee({...updatedEmployee, id: this.employeeID})
+    const wasUpdated: boolean = this._dataService.updateEmployee({...updatedEmployee, id: this.employeeID})
     
     const toast = this._toastController.create({
-      message: `Os Dados de ${updatedEmployee.name} Foram Atualizados`,
-      duration: 1500,
-      position: "top"
+      message: wasUpdated?`Os dados de ${updatedEmployee.name} foram atualizados`:`Email fornecido já está cadastrado para outro funcionário`,
+      duration: 3500,
+      position: "top",
+      color: wasUpdated?undefined:"danger"
     })
     toast.then(toastMessage => toastMessage.present())
     
-    setTimeout(() => {
+    if(wasUpdated)
       this._router.navigate(["/home"])
-    }, 1500)
-  }
-
-  ngOnInit() {
   }
 
 }
