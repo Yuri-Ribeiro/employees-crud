@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class UpdateEmployeePage implements OnInit {
   updateFormGroup: FormGroup
-  blankAvatar: string
   employeeID: string
   avatar: string
   originalAvatarUrl: string
@@ -28,8 +27,6 @@ export class UpdateEmployeePage implements OnInit {
     activatedRoute: ActivatedRoute,
     formBuilder: FormBuilder
   ) {
-    this.blankAvatar = this._dataService.getBlankAvatar()
-
     // como os dados ainda não são persistidos, haverá erro se atualizar a aplicação e tentar acessar um usuário recém-criado
     this.employeeID = activatedRoute.snapshot.params["employeeID"]
 
@@ -47,7 +44,6 @@ export class UpdateEmployeePage implements OnInit {
 
   ngOnInit() {
     // quando a Url no campo do formulário mudar, o avatar do template será atualizado em tempo real. Se for uma string vazia, voltará a ser a original.
-    // Se a original não estiver definida, o template mostrará a blankAvatar
     this.updateTemplateAvatarSubscription = this.updateFormGroup.controls['avatarUrl'].valueChanges.subscribe(newAvatarUrl => {
       this.avatar = newAvatarUrl == "" ? this.originalAvatarUrl: newAvatarUrl
     })
