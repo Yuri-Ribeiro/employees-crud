@@ -36,7 +36,7 @@ export class UpdateEmployeePage implements OnInit {
       id:[{value: null, disabled: true}, Validators.required],
       avatarUrl:[],
       name: [, Validators.required],
-      email: [, Validators.required],
+      email: [, [Validators.required, Validators.email]],
       job: [],
       description: []
     })
