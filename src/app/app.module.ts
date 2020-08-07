@@ -14,6 +14,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { environment } from "src/environments/environment";
 
 @NgModule({
@@ -22,6 +23,7 @@ import { environment } from "src/environments/environment";
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule],

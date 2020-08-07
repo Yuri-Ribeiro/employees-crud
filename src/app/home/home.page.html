@@ -7,34 +7,40 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- A tag ng-template simplesmente define um modelo que não é renderizado. Esse é um comportamento esperado, pois queremos somente defini-lo, não
+  defini-la de forma permanente. Ativaremos ela de acordo com uma diretiva ngIf mais a frente. Usamos a sintaxe #skeleton para darmos um nome/referência
+  ao modelo -->
+  <ng-template #skeleton>
+    <ion-list>
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
 
-  <ion-list *ngIf="!employees; else employeeList">
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
 
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
+      <ion-card>
+        <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
+        <ion-card-header class="skeleton-header">
+          <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+  </ng-template>
 
-    <ion-card>
-      <ion-skeleton-text class="skeleton-image ion-margin" animated></ion-skeleton-text>
-      <ion-card-header class="skeleton-header">
-        <ion-skeleton-text class="ion-margin-bottom" animated></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-card-header>
-    </ion-card>
-  </ion-list>
-
-  <ng-template  #employeeList>
+  <!-- Usaremos aqui AsyncPipe para indicar que um dado é obtido de forma assíncrona (pode trabalhar com Observable ou Promise). No nosso caso, irá
+  se inscrever no Observable e retornar o último valor emitido -->
+  <ng-container  *ngIf="(employeesObservable | async) as employees; else skeleton">
     <ion-list>
       <ion-item-sliding *ngFor="let employee of employees">
 
@@ -68,6 +74,6 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-  </ng-template>
+  </ng-container>
 
 </ion-content>

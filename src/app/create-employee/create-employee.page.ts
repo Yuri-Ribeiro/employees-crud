@@ -21,11 +21,11 @@ export class CreateEmployeePage implements OnInit {
     private _toastController: ToastController,
     private _alertController: AlertController,
     private _camera: Camera,
-    formBuider: FormBuilder
+    formBuilder: FormBuilder
   ) {
     this.blankAvatar = this._dataService.getBlankAvatar()
 
-    this.registrationFormGroup = formBuider.group({
+    this.registrationFormGroup = formBuilder.group({
       avatarUrl:[""],
       name: [ , Validators.required],
       email: [ , Validators.required],
@@ -45,20 +45,28 @@ export class CreateEmployeePage implements OnInit {
       ...this.registrationFormGroup.value,
       avatarUrl: this.avatar
     }
-    const wasCreated: boolean = this._dataService.createEmployee(newEmployee)
+    this._dataService.createEmployee(newEmployee).subscribe( (firebaseResponse: Promise<any>) => {
+      firebaseResponse
+        .then( () => {
+          const toast = this._toastController.create({
+            message: `${newEmployee.name} foi cadastrado com sucesso`,
+            duration: 3500,
+            position: "top"
+          })
+          toast.then(toastMessage => toastMessage.present())
 
-    const toast = this._toastController.create({
-      message: wasCreated?`${newEmployee.name} foi cadastrado com sucesso`:`Usuário já está cadastrado`,
-      duration: 2000,
-      position: "top",
-      color: wasCreated?undefined:"danger"
+          this._router.navigate(["/home"])
+        })
+        .catch(error => {
+          const toast = this._toastController.create({
+            message: `Erro ao adicionar: ${error}`,
+            duration: 3500,
+            position: "top",
+            color:"danger"
+          })
+          toast.then(toastMessage => toastMessage.present())
+        })
     })
-    toast.then(toastMessage => toastMessage.present())
-    
-    if(wasCreated)
-      setTimeout(() => {
-        this._router.navigate(["/home"])
-      }, 1500)
   }
 
   async selectImageSource() {
