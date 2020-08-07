@@ -33,7 +33,7 @@ export class SignupPage implements OnInit {
 
     this._loginService.signup(newUserCredentials)
       .then( authData => {
-        // quando a nova conta for criada, o usuário será logado automaticamente graças. Esse é um comportamento padrão da função createUserWithEmailAndPassword
+        // quando a nova conta for criada, o usuário será logado automaticamente. Esse é um comportamento padrão da função createUserWithEmailAndPassword
         this._router.navigate(["/home"])
         // dados que podem ser úteis após login
         console.log(authData)
