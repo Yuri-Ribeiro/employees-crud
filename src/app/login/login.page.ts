@@ -19,8 +19,8 @@ export class LoginPage implements OnInit {
     formBuilder: FormBuilder
   ){
     this.loginFormGroup = formBuilder.group({
-      email: ["", [Validators.required]],
-      password: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     })
   }
 
