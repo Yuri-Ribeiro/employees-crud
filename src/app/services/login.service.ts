@@ -19,4 +19,11 @@ export class LoginService {
       credentials.password
     )
   }
+
+  signup(credentials: LoginCredentials): Promise<any>{
+    return this._angularFireAuth.createUserWithEmailAndPassword(
+      credentials.email,
+      credentials.password
+    )
+  }
 }

@@ -12,3 +12,17 @@
     font-style: italic;
     margin-bottom: 20vh;
 }
+
+// propriedades disponíveis em: https://ionicframework.com/docs/api/toolbar
+.signup-toolbar {
+    --min-height: 30px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --opacity: 40%
+}
+
+.signup-link {
+    display: block;
+    text-align: center;
+    font-size: medium;
+}

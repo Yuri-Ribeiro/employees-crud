@@ -37,7 +37,16 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+      },
+      {
+        path: 'signup',
+        loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+      }
+    ],
     canActivate: [CanEnterLoginPageGuard]
   }
 ];

@@ -1,37 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoginService, LoginCredentials } from '../services/login.service';
 import { Router } from '@angular/router';
-import { LoginCredentials, LoginService } from '../services/login.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.page.html',
+  styleUrls: ['./signup.page.scss'],
 })
-export class LoginPage implements OnInit {
-  loginFormGroup: FormGroup
+export class SignupPage implements OnInit {
+  signupFormGroup: FormGroup
 
   constructor(
     private _loginService: LoginService,
     private _router: Router,
     private _toastController: ToastController,
-    formBuilder: FormBuilder
+    formBuider: FormBuilder
   ){
-    this.loginFormGroup = formBuilder.group({
+    this.signupFormGroup = formBuider.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.required],
+      // Firebase requer uma senha de no mínimo 6 caracteres
+      password: ["", [Validators.required, Validators.minLength(6)]],
     })
   }
 
   ngOnInit() {
   }
 
-  login() {
-    const loginCredentials: LoginCredentials = this.loginFormGroup.value;
+  signup() {
+    const newUserCredentials: LoginCredentials = this.signupFormGroup.value;
 
-    this._loginService.login(loginCredentials)
+    this._loginService.signup(newUserCredentials)
       .then( authData => {
+        // quando a nova conta for criada, o usuário será logado automaticamente. Esse é um comportamento padrão da função createUserWithEmailAndPassword
         this._router.navigate(["/home"])
         // dados que podem ser úteis após login
         console.log(authData)
@@ -43,7 +45,7 @@ export class LoginPage implements OnInit {
           position: "top",
           color: "danger"
         })
-        
+
         toast.then( toastMessage => toastMessage.present() )
       })
   }
