@@ -24,7 +24,7 @@ export class CreateEmployeePage implements OnInit {
     this.registrationFormGroup = formBuilder.group({
       avatarUrl:[""],
       name: [ , Validators.required],
-      email: [ , Validators.required],
+      email: [ , [Validators.required, Validators.email]],
       job: [],
       description: [],
     })
