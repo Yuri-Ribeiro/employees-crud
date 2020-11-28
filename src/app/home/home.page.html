@@ -1,12 +1,32 @@
+<ion-menu side="end" menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Sair</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Funcionários
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content id="main" [fullscreen]="true">
   <!-- A tag ng-template simplesmente define um modelo que não é renderizado. Esse é um comportamento esperado, pois queremos somente defini-lo, não
   defini-la de forma permanente. Ativaremos ela de acordo com uma diretiva ngIf mais a frente. Usamos a sintaxe #skeleton para darmos um nome/referência
   ao modelo -->

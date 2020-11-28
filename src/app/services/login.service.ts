@@ -26,4 +26,8 @@ export class LoginService {
       credentials.password
     )
   }
+
+  signOut(): Promise<void>{
+    return this._angularFireAuth.signOut()
+  }
 }
